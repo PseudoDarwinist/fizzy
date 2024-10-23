@@ -9,6 +9,6 @@ module Bubble::Eventable
 
   private
     def track_event(action, creator: Current.user, **particulars)
-      events.create! action:, creator:, particulars:
+      events.create! action: action, creator: creator, particulars: { creator_name: creator.name }.merge(particulars)
     end
 end

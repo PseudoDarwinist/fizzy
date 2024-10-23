@@ -10,12 +10,16 @@ module Bubble::Staged
   end
 
   def toggle_stage(stage)
-    if self.stage == stage
-      update! stage: nil
-      track_event :unstaged, stage_id: stage.id
+    if self.stage_id == stage.id
+      transaction do
+        update! stage: nil
+        track_event :unstaged, stage_name: stage.name
+      end
     else
-      update! stage: stage
-      track_event :staged, stage_id: stage.id
+      transaction do
+        update! stage: stage
+        track_event :staged, stage_name: stage.name
+      end
     end
   end
 end

@@ -2,71 +2,82 @@ logo_created:
   creator: david
   bubble: logo
   action: created
+  particulars: <%= { creator_name: "David" }.to_json %>
   created_at: <%= 1.week.ago %>
 
 logo_assignment_jz:
   creator: david
   bubble: logo
   action: assigned
-  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
-  created_at: <%= 1.week.ago %>
-
-logo_assignment_km:
-  creator: david
-  bubble: logo
-  action: assigned
-  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:kevin) ] }.to_json %>
-  created_at: <%= 1.day.ago %>
+  particulars: <%= { assignee_names: [ "JZ" ], creator_name: "David" }.to_json %>
+  created_at: <%= 1.week.ago + 1.hour %>
 
 logo_boost_dhh:
   creator: david
   bubble: logo
   action: boosted
-  created_at: <%= 1.week.ago %>
+  particulars: <%= { creator_name: "David" }.to_json %>
+  created_at: <%= 1.week.ago + 2.hours %>
+
+logo_assignment_km:
+  creator: david
+  bubble: logo
+  action: assigned
+  particulars: <%= { assignee_names: [ "Kevin" ], creator_name: "David" }.to_json %>
+  created_at: <%= 1.day.ago %>
 
 logo_boost_km1:
   creator: kevin
   bubble: logo
   action: boosted
-  created_at: <%= 1.day.ago %>
+  particulars: <%= { creator_name: "Kevin" }.to_json %>
+  created_at: <%= 1.day.ago + 1.hour %>
 
 logo_boost_km2:
   creator: kevin
   bubble: logo
   action: boosted
-  created_at: <%= 1.day.ago %>
+  particulars: <%= { creator_name: "Kevin" }.to_json %>
+  created_at: <%= 1.day.ago + 2.hours %>
 
 logo_boost_jz1:
   creator: jz
   bubble: logo
   action: boosted
-  created_at: <%= 1.day.ago %>
+  particulars: <%= { creator_name: "JZ" }.to_json %>
+  created_at: <%= 1.day.ago + 3.hours %>
 
 logo_boost_jz2:
   creator: jz
   bubble: logo
   action: boosted
+  particulars: <%= { creator_name: "JZ" }.to_json %>
+  created_at: <%= 1.hour.ago %>
 
 layout_created:
   creator: david
   bubble: layout
   action: created
+  particulars: <%= { creator_name: "David" }.to_json %>
   created_at: <%= 1.week.ago %>
 
 layout_assignment_jz:
   creator: david
   bubble: layout
   action: assigned
-  particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
+  particulars: <%= { assignee_names: [ "JZ" ], creator_name: "David" }.to_json %>
+  created_at: <%= 1.hour.ago %>
 
 text_created:
   creator: kevin
   bubble: text
   action: created
+  particulars: <%= { creator_name: "Kevin" }.to_json %>
   created_at: <%= 1.week.ago %>
 
 shipping_created:
   creator: kevin
   bubble: shipping
   action: created
+  particulars: <%= { creator_name: "Kevin" }.to_json %>
   created_at: <%= 1.week.ago %>

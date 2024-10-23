@@ -16,8 +16,7 @@ class BubbleTest < ActiveSupport::TestCase
 
     assert_equal users(:kevin, :jz, :david), bubbles(:logo).assignees
     assert_equal users(:david, :kevin), bubbles(:logo).assigners.uniq
-    assert_equal [ users(:david).id ], bubbles(:logo).events.last.assignee_ids
-    assert_equal [ "David" ], bubbles(:logo).events.last.assignees.map(&:name)
+    assert_equal [ "David" ], bubbles(:logo).events.last.assignee_names
   end
 
   test "searchable by title" do
