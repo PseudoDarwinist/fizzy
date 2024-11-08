@@ -10,7 +10,7 @@ class Filter < ApplicationRecord
       filter.save!
       filter
     rescue ActiveRecord::RecordNotUnique
-      find_by!(params: filter.params).tap(&:touch)
+      find_by!(params_digest: filter.hashed_params).tap(&:touch)
     end
   end
 

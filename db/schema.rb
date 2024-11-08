@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_05_224305) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_08_205445) do
   create_table "accesses", force: :cascade do |t|
     t.integer "bucket_id", null: false
     t.integer "user_id", null: false
@@ -131,11 +131,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_05_224305) do
 
   create_table "filters", force: :cascade do |t|
     t.integer "creator_id", null: false
-    t.json "params", default: {}, null: false
+    t.string "params_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "fields", default: {}, null: false
-    t.index ["creator_id", "params"], name: "index_filters_on_creator_id_and_params", unique: true
+    t.index ["creator_id", "params_digest"], name: "index_filters_on_creator_id_and_params_digest", unique: true
   end
 
   create_table "filters_tags", id: false, force: :cascade do |t|
