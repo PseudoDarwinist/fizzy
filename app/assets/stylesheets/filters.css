@@ -27,32 +27,19 @@
 }
 
 .filter__menu {
-  margin: 0 auto;
-  min-inline-size: 0;
-
-  li {
+  a {
+    border-radius: 0.5em;
+    color: var(--color-ink);
     display: block;
-    margin: 0;
-    max-inline-size: 100%;
-    min-inline-size: 0;
-    padding: 0;
-    text-align: start;
+    overflow: hidden;
+    padding: 0.3em 0.7em;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-
-    a {
-      border-radius: 0.5em;
-      color: var(--color-ink);
-      display: block;
-      overflow: hidden;
-      padding: 0.3em 0.7em;
-      text-decoration: none;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      @media (hover: hover) {
-        &:hover {
-          background-color: var(--color-selected);
-        }
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-selected);
       }
     }
   }

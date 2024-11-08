@@ -1,25 +1,31 @@
 <%= turbo_frame_tag dom_id(@bubble, :stage_picker) do %>
   <% if @selected_workflow %>
-    <article class="border txt-large" style="position: absolute; top: 5rem; right: 1rem;" data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
-      <button class="btn btn--plain filter__button" data-action="click->dialog#toggle" data-dialog-modal-value="true">
-        <%= @selected_workflow.name %>
-      </button>
+    <aside style="position: absolute; top: 10rem; right: 3rem; --bubble-color: <%= @bubble.color %>"
+        data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+      <div class="flex flex-column">
+        <button class="btn center" data-action="click->dialog#toggle" data-dialog-modal-value="true">
+          <%= image_tag "bolt.svg", aria: { hidden: true }, size: 24 %>
+          <span class="for-screen-reader">Choose a workflow</span>
+        </button>
+        <strong class="txt-large center"><%= @selected_workflow.name %></strong>
+        <hr class="separator--horizontal full-width" hidden />
+      </div>
 
       <dialog class="filter__popup panel fill-white shadow" data-dialog-target="dialog">
-        <menu class="filter__menu unpad margin-none">
+        <menu class="filter__menu list-style-none unpad margin-none">
           <% @workflows.each do |workflow| %>
             <li><%= link_to_stage_picker @bubble, workflow %></li>
           <% end %>
         </menu>
       </dialog>
 
-      <div class="border-top flex flex-column pad gap">
-        <menu class="filter__menu unpad margin-none">
+      <div class="workflow border pad border-radius margin-block-start-half">
+        <div class="flex flex-column gap-half">
           <% @selected_workflow.stages.each do |stage| %>
-            <li><%= button_to_set_stage @bubble, stage %></li>
+            <%= button_to_set_stage @bubble, stage %>
           <% end %>
-        </menu>
+        </div>
       </div>
-    </article>
+    </aside>
   <% end %>
 <% end %>

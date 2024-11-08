@@ -1,0 +1,30 @@
+.workflow-stage {
+  --btn-border-radius: 0.5em;
+  --hover-size: 0;
+
+  gap: 0.7ch;
+
+  &:before {
+    content: "";
+    display: inline-flex;
+    inline-size: 1em;
+    block-size: 1em;
+    border-radius: 50%;
+    border: 2px solid var(--color-ink);
+    flex-shrink: 0;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: color(from var(--bubble-color) srgb r g b / 0.15);
+    }
+  }
+}
+
+.workflow-stage--current {
+  color: var(--bubble-color);
+
+  &:before {
+    background-color: var(--bubble-color);
+  }
+}
