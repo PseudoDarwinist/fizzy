@@ -5,7 +5,7 @@
     <div class="flex align-center gap-half fill-selected justify-center border-block margin-block-end"
           style="--border-color: var(--color-selected-dark); --border-style: dashed; view-transition-name: draft-banner;">
       You have an unsaved bubble. Would you like to continue where you left off?
-      <%= button_to bucket_bubble_recover_path(@bubble.bucket, @bubble), class: "btn txt-small btn--link" do %>
+      <%= button_to bucket_bubble_recover_path(@bubble.bucket, @bubble), class: "btn txt-small btn--link", data: { turbo_action: "replace" } do %>
         <span>Yes please!</span>
       <% end %>
     </div>
