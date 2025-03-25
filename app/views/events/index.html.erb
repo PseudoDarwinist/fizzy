@@ -22,6 +22,7 @@
     <div id="activity" class="events__index flex flex-column">
       <%= render "events/day", activity_day: @activity_day, next_day: @next_day, events: @events %>
     </div>
+    <%= event_next_page_link(@next_day) %>
   </div>
 
   <div class="txt-align-start">
@@ -49,5 +50,3 @@
     </div>
   </div>
 </div>
-
-<%= event_next_page_link(@next_day) %>
