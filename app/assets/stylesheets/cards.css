@@ -184,7 +184,7 @@
 }
 
 .card-sorting__filter {
-  inset: auto 50% -3em;
+  inset: auto 50% -4em;
   margin-inline-start: -1em;
   position: absolute;
   transform: translateX(-50%);
