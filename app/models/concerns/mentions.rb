@@ -12,6 +12,12 @@ module Mentions
     end
   end
 
+  def mentionable_content
+    self.class.reflect_on_all_associations(:has_one).filter { it.klass == ActionText::Markdown }.collect do |association|
+      send(association.name).to_plain_text
+    end.join(" ")
+  end
+
   private
     def collect_mentions_later
       Mention::CollectJob.perform_later(self, mentioner: Current.user)
