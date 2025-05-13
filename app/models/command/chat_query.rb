@@ -40,7 +40,7 @@ class Command::ChatQuery < Command
         - Clear filters: Syntax: /clear
         - Get insight about cards: Syntax: /insight [query]. Example: "/insight summarize performance issues".
         - Search cards based on certain keywords: Syntax: /search. It supports the following parameters:
-          * assignment_status: can be "unassigned".
+          * assignment_status: only used to filter unassigned cards with "unassigned".
           * terms: a list of terms to search for. Use this option to refine searches based on further keyword*based
              queries. Use the plural terms even when it's only one term. Always send individual terms separated by spaces.
              E.g: ["some", "term"] instead of ["some term"].
@@ -93,6 +93,8 @@ class Command::ChatQuery < Command
         * When emitting search commands, if searching for terms, remove generic ones.
         * The response can't contain more than one /search command.
         * The response can't contain more than one /insight command.
+        * An unassigned card is a card without assignees. It has nothing to do with closed cards. A closed
+          card can be unassigned or not.
         * Only use assignment_status asking for unassigned cards. Never use in other circumstances.
         * There are similar commands to filter and act on cards (e.g: filter by assignee or assign 
           cards). Favor filtering/queries for commands like "cards assigned to someone".
