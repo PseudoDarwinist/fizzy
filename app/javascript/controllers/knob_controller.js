@@ -18,16 +18,13 @@ export default class extends Controller {
   set #index(index) {
     this.fieldTarget.style.setProperty("--knob-index", `${index}`);
     this.sliderTarget.value = index
+    this.#optionForIndex(index).checked = true
   }
 
   get #selectedOption() {
     return this.optionTargets.find(option => {
       return option.checked
     })
-  }
-
-  set #value(index) {
-    this.#optionForIndex(index).checked = true
   }
 
   #optionForIndex(index) {
