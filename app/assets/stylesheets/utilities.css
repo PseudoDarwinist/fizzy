@@ -39,6 +39,7 @@
   .align-start { align-items: start; }
   .align-end { align-items: end; }
 
+  .align-self-center { align-self: center; }
   .align-self-end { align-self: end; }
   .align-self-start { align-self: start; }
 
