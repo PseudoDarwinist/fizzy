@@ -42,7 +42,6 @@ export default class extends Controller {
   }
 
   submitCommand({ target }) {
-    console.debug("Es", target);
     this.#submitCommand()
   }
 
