@@ -71,7 +71,7 @@ class Event::Summarizer
     attr_reader :prompt, :llm_model
 
     def chat
-      chat = RubyLLM.chat(model: LLM_MODEL)
+      chat = RubyLLM.chat(model: llm_model)
       chat.with_instructions(combine(prompt, domain_model_prompt, user_data_injection_prompt))
     end
 
