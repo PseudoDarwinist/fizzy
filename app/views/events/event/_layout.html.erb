@@ -1,7 +1,6 @@
 <%= link_to event.notifiable_target,
-      class: "event event--#{ event.action } #{ "event--golden" if event.card.golden? && card.doing? } panel center-block flex flex-column full-width align-start justify-start position-relative",
-      style: "--card-color: #{ card.closed? ? "var(--color-card-complete)" : card.color }; background-color: color-mix(in srgb, var(--card-color) 10%, var(--color-canvas));
-  color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink)); border: 1px solid color-mix(in srgb, var(--card-color) 20%, var(--color-canvas))",
+      class: "event event--#{ event.action } #{ "golden-effect" if event.card.golden? && card.doing? } center-block flex flex-column full-width align-start justify-start position-relative",
+      style: "--card-color: #{ card.closed? ? "var(--color-card-complete)" : card.color };",
       data: { related_element_target: "related",
             related_element_group_value: card.id,
             action: "mouseover->related-element#highlight mouseout->related-element#unhighlight" } do %>

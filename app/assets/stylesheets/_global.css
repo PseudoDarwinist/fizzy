@@ -188,6 +188,7 @@
   --color-terminal-bg: var(--color-ink-lightest);
   --color-terminal-text: var(--color-ink);
   --color-terminal-text-light: var(--color-ink-lighter);
+  --color-golden: oklch(89.1% 0.178 95.7);
 
   /* Colors: Cards */
   --color-card-default: oklch(var(--lch-blue-dark));
@@ -311,6 +312,7 @@
 
     --color-terminal-bg: var(--color-canvas);
     --color-terminal-text-light: oklch(var(--lch-green-dark));
+    --color-golden: oklch(var(--lch-blue-light));
 
     --shadow: 0 0 0 1px oklch(var(--lch-black) / 0.42),
               0 .2em 1.6em -0.8em oklch(var(--lch-black) / 0.6),

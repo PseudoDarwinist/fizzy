@@ -34,7 +34,7 @@ module CardsHelper
   def card_article_tag(card, id: dom_id(card, :article), **options, &block)
     classes = [
       options.delete(:class),
-      ("card--golden" if card.golden?),
+      ("golden-effect" if card.golden?),
       ("card--considering" if card.considering?),
       ("card--doing" if card.doing?),
       ("card--drafted" if card.drafted?)
