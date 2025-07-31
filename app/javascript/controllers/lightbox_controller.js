@@ -4,15 +4,11 @@ export default class extends Controller {
   static targets = [ "image", "dialog", "zoomedImage" ]
 
   connect() {
-    this.dialogTarget.addEventListener('transitionend', this.onTransitionEnd.bind(this))
+    this.dialogTarget.addEventListener('transitionend', this.handleTransitionEnd.bind(this))
   }
 
-  // Only remove the image src after the CSS transition has finished
-  onTransitionEnd(event) {
-    if (this._waitingForTransition && !this.dialogTarget.open) {
-      this._waitingForTransition = false
-      this.zoomedImageTarget.src = ""
-    }
+  disconnect() {
+    this.dialogTarget.removeEventListener('transitionend', this.handleTransitionEnd.bind(this))
   }
 
   open(event) {
@@ -20,8 +16,16 @@ export default class extends Controller {
     this.#set(event.target.closest("a"))
   }
 
+  // Wait for the transition to finish before resetting the image
+  handleTransitionEnd(event) {
+    if (event.target === this.dialogTarget && !this.dialogTarget.open) {
+      this.reset()
+    }
+  }
+
   reset() {
-    this._waitingForTransition = true
+    this.zoomedImageTarget.src = ""
+    this.dispatch('closed')
   }
 
   #set(target) {

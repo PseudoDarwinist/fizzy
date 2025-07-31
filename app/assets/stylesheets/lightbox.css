@@ -12,51 +12,56 @@
     max-width: unset;
     overflow: hidden;
     padding: var(--block-space-half) var(--inline-space);
-    place-items: center;
 
     &::backdrop {
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
-      background-color: oklch(var(--lch-canvas) / 50%);
-    }
-
-    /* Default transition state */
-    &, &::backdrop, img {
-      opacity: 0;
-      transition: var(--dialog-duration) allow-discrete;
-      transition-property: display, opacity, overlay, transform;
+      background-color: oklch(var(--lch-black) / 50%);
     }
 
     img {
-      transform: translateY(10dvh);
+      animation: slide-down var(--dialog-duration);
+      animation-fill-mode: forwards;
+      display: block;
+      margin: auto;
     }
 
-    &[open] {
-      display: grid;
-
-      &, &::backdrop, img {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Closed state */
+    &,
+    &::backdrop {
+      opacity: 0;
+      transition: var(--dialog-duration) allow-discrete;
+      transition-property: display, opacity, overlay;
     }
 
-    @starting-style {
-      &[open],
-      &[open]::backdrop {
+    /* Open state */
+    &[open],
+    &[open]::backdrop {
+      opacity: 1;
+
+      @starting-style {
         opacity: 0;
+      }
+
+      img {
+        animation: slide-up var(--dialog-duration);
       }
     }
   }
 
   .lightbox__btn {
-    align-self: start;
-    grid-area: 1/1;
-    justify-self: end;
+    inset: var(--block-space-half) var(--inline-space) auto auto;
+    position: absolute;
   }
 
   .lightbox__image {
     grid-area: 1/1;
     max-inline-size: calc(100dvw - (var(--inline-space) * 2));
     max-block-size: calc(100dvh - (var(--block-space) * 2));
+  }
+
+  /* Prevent body from scrolling when lightbox is open */
+  html:has(.lightbox[open]) {
+    overflow: clip;
   }
 }
