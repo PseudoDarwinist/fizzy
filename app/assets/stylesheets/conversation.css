@@ -15,7 +15,7 @@
     --input-padding: 0.1em;
 
     border-width: 0 0 1px;
-    max-inline-size: 40ch;
+    max-inline-size: 50ch;
   }
 
   .conversation__message {
@@ -79,8 +79,9 @@
   }
 
   .conversation__thinking-indicator {
-    inset: auto auto var(--footer-height) calc(var(--block-space) * -1.5);
+    inset: auto auto var(--footer-height) 50%;
     position: absolute;
+    transform: translateX(-50%);
 
     .spinner {
       display: none;

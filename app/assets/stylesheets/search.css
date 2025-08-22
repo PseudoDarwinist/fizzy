@@ -24,8 +24,7 @@
     --input-padding: 0.1em;
 
     border-width: 0 0 1px;
-    max-inline-size: 40ch;
-
+    max-inline-size: 50ch;
 
     &::-webkit-search-cancel-button {
       --clear-icon-size: 0.75rem;

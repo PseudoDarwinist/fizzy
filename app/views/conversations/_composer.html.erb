@@ -1,5 +1,5 @@
 <%= form_with model: Conversation::Message.new, local: true, 
-      class: "conversation__composer flex align-center position-relative gap-half",
+      class: "conversation__composer flex align-center justify-center gap-half",
       data: {
         turbo_frame: "conversation",
         action: "turbo:submit-end->conversation--composer#submitEnd",
