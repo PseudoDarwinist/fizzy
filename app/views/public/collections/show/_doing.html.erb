@@ -4,7 +4,7 @@
   </h2>
 
   <% if page.used? %>
-    <%= render partial: "cards/display/public_preview", collection: page.records, as: :card, cached: ->(card) { cacheable_preview_parts_for(card) } %>
+    <%= render partial: "cards/display/public_preview", collection: page.records, as: :card, cached: ->(card) { card.cache_invalidation_parts.for_preview } %>
 
     <% unless page.last? %>
       <div class="full-width">
