@@ -288,14 +288,25 @@
 
   .blank-slate--card {
     box-shadow: none !important;
-    border: 2px dashed color-mix(in srgb, var(--card-color) 40%, var(--color-canvas));;
-    font-weight: 600;
-    rotate: 2deg;
+    color: color-mix(in srgb, var(--card-color) 70%, var(--color-canvas));
 
     p {
+      font-size: var(--text-small);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &.blank-slate-for-grid {
+        display: none;
+
+        .cards--grid & {
+          display: initial;
+        }
+      }
+
+      .cards--grid &:not(.blank-slate-for-grid) {
+        display: none;
+      }
     }
   }
 
