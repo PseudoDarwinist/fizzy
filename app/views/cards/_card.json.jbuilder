@@ -1,4 +1,4 @@
-json.cache! [card, card.column&.color] do
+json.cache! [ card, card.column&.color ] do
   json.(card, :id, :title, :status)
   json.image_url card.image.presence && url_for(card.image)
 
