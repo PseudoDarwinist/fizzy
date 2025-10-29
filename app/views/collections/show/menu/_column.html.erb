@@ -12,6 +12,24 @@
         </button>
       </li>
       <li class="popup__item">
+        <%= button_to column_left_position_path(column),
+              class: "popup__btn btn",
+              form_class: "display-contents",
+              disabled: column.leftmost? do %>
+          <%= icon_tag "arrow-left" %>
+          <span>Move left</span>
+        <% end %>
+      </li>
+      <li class="popup__item">
+        <%= button_to column_right_position_path(column),
+              class: "popup__btn btn",
+              form_class: "display-contents",
+              disabled: column.rightmost? do %>
+          <%= icon_tag "arrow-right" %>
+          <span>Move right</span>
+        <% end %>
+      </li>
+      <li class="popup__item">
         <%= button_to collection_column_path(column.collection, column),
               method: :delete,
               class: "popup__btn btn txt-negative",
@@ -21,6 +39,8 @@
           <span>Delete column</span>
         <% end %>
       </li>
+
+
     </ul>
   </dialog>
 
