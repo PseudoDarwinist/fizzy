@@ -8,7 +8,10 @@ export default class extends Controller {
     selectionAttribute: { type: String, default: "aria-selected" },
     focusOnSelection: { type: Boolean, default: true },
     actionableItems: { type: Boolean, default: false },
-    reverseNavigation: { type: Boolean, default: false }
+    reverseNavigation: { type: Boolean, default: false },
+    supportHorizontalNavigation: { type: Boolean, default: true },
+    supportVerticalNavigation: { type: Boolean, default: true },
+    hasNestedNavigation: { type: Boolean, default: false }
   }
 
   connect() {
@@ -73,22 +76,30 @@ export default class extends Controller {
 
   async #setCurrentFrom(element) {
     const selectedItem = this.#visibleItems.find(item => item.contains(element))
-    const id = selectedItem?.getAttribute("id")
 
     if (selectedItem) {
-      this.#clearSelection()
-      selectedItem.setAttribute(this.selectionAttributeValue, "true")
-      this.currentItem = selectedItem
-      await nextFrame()
-      try {
-        this.currentItem.scrollIntoView({ block: "nearest", inline: "nearest" })
-      } catch (e) {}
-
-      if (this.focusOnSelectionValue) { this.currentItem.focus() }
-      if (this.hasInputTarget && id) {
-        this.inputTarget.setAttribute("aria-activedescendant", id)
-      }
+      await this.#selectItem(selectedItem)
     }
+  }
+
+  async #selectItem(item) {
+    this.#clearSelection()
+    item.setAttribute(this.selectionAttributeValue, "true")
+    this.currentItem = item
+
+    await nextFrame()
+
+    this.#scrollAndFocusOnSelectedItem()
+  }
+
+  #scrollAndFocusOnSelectedItem() {
+    const id = this.currentItem?.getAttribute("id")
+    this.currentItem.scrollIntoView({ block: "nearest", inline: "nearest" })
+    if (this.focusOnSelectionValue) { this.currentItem.focus() }
+    if (this.hasInputTarget && id) {
+      this.inputTarget.setAttribute("aria-activedescendant", id)
+    }
+
   }
 
   #clearSelection() {
@@ -128,18 +139,26 @@ export default class extends Controller {
 
   #keyHandlers = {
     ArrowDown(event) {
-      const selectMethod = this.reverseNavigationValue ? this.#selectPrevious.bind(this) : this.#selectNext.bind(this)
-      this.#handleArrowKey(event, selectMethod)
+      if (this.supportVerticalNavigationValue) {
+        const selectMethod = this.reverseNavigationValue ? this.#selectPrevious.bind(this) : this.#selectNext.bind(this)
+        this.#handleArrowKey(event, selectMethod)
+      }
     },
     ArrowUp(event) {
-      const selectMethod = this.reverseNavigationValue ? this.#selectNext.bind(this) : this.#selectPrevious.bind(this)
-      this.#handleArrowKey(event, selectMethod)
+      if (this.supportVerticalNavigationValue) {
+        const selectMethod = this.reverseNavigationValue ? this.#selectNext.bind(this) : this.#selectPrevious.bind(this)
+        this.#handleArrowKey(event, selectMethod)
+      }
     },
     ArrowRight(event) {
-      this.#handleArrowKey(event, this.#selectNext.bind(this), false)
+      if (this.supportHorizontalNavigationValue) {
+        this.#handleArrowKey(event, this.#selectNext.bind(this), false)
+      }
     },
     ArrowLeft(event) {
-      this.#handleArrowKey(event, this.#selectPrevious.bind(this), false)
+      if (this.supportHorizontalNavigationValue) {
+        this.#handleArrowKey(event, this.#selectPrevious.bind(this), false)
+      }
     },
     Enter(event) {
       if (event.shiftKey) {
