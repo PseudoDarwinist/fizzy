@@ -114,7 +114,7 @@ Set those in the `VAPID_PRIVATE_KEY` and `VAPID_PUBLIC_KEY` environment variable
 
 #### S3 storage (optional)
 
-If you're rather that uploaded files were stored in an S3 bucket, rather than your mounted volume, you can set that up.
+If you'd prefer that uploaded files were stored in an S3 bucket rather than in your mounted volume, you can set that up.
 
 First set `ACTIVE_STORAGE_SERVICE` to `s3`.
 Then set the following as appropriate for your S3 bucket:
