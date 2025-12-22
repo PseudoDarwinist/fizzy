@@ -1,0 +1,37 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  primary:
+    <<: *default
+    database: fizzy_development
+    username: fizzy
+    password: <%= ENV["FIZZY_DATABASE_PASSWORD"] %>
+    host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  cable:
+    <<: *default
+    database: fizzy_development_cable
+    migrations_paths: db/cable_migrate
+
+test:
+  primary:
+    <<: *default
+    database: fizzy_test
+    username: fizzy
+    password: <%= ENV["FIZZY_DATABASE_PASSWORD"] %>
+    host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  cable:
+    <<: *default
+    database: fizzy_test_cable
+    migrations_paths: db/cable_migrate
+
+production:
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+  cable:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>_cable
+    migrations_paths: db/cable_migrate

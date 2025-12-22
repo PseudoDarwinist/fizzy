@@ -1,0 +1,54 @@
+databases:
+  - name: fizzy-db
+    databaseName: fizzy_production
+    user: fizzy
+    plan: free
+
+services:
+  - type: web
+    name: fizzy-app
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fizzy-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false # You'll need to add this manually in Render dashboard
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: enabled
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: WEB_CONCURRENCY
+        value: 2
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: FIZZY_DB_ADAPTER
+        value: postgresql
+
+  - type: worker
+    name: fizzy-worker
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rake solid_queue:start"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fizzy-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false # You'll need to add this manually
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: FIZZY_DB_ADAPTER
+        value: postgresql
