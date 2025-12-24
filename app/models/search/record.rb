@@ -1,7 +1,13 @@
-require_relative "record/postgresql" if ENV["FIZZY_DB_ADAPTER"] == "postgresql" || ENV["DATABASE_ADAPTER"] == "postgresql"
-
 class Search::Record < ApplicationRecord
-  include const_get(connection.adapter_name)
+  ADAPTER_MODULES = {
+    "SQLite"      => "search/record/sqlite",
+    "Trilogy"     => "search/record/trilogy",
+    "PostgreSQL"  => "search/record/postgresql",
+  }.freeze
+
+  module_path = ADAPTER_MODULES[connection.adapter_name]
+  require_relative module_path if module_path
+  include const_get("Search::Record::#{connection.adapter_name}")
 
   belongs_to :searchable, polymorphic: true
   belongs_to :card
