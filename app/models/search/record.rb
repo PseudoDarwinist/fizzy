@@ -1,3 +1,5 @@
+require_relative "record/postgresql" if ENV["FIZZY_DB_ADAPTER"] == "postgresql" || ENV["DATABASE_ADAPTER"] == "postgresql"
+
 class Search::Record < ApplicationRecord
   include const_get(connection.adapter_name)
 
