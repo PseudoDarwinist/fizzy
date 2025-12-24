@@ -1,3 +1,6 @@
+# Ensure Rails and application constants are loaded when running `bundle exec puma -C config/puma.rb`
+require_relative "environment" unless defined?(Rails)
+
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)
 
