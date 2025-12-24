@@ -10,6 +10,7 @@ services:
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
+    postDeployCommand: "bundle exec rails db:migrate"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
@@ -31,6 +32,8 @@ services:
       - key: RAILS_MAX_THREADS
         value: 5
       - key: FIZZY_DB_ADAPTER
+        value: postgresql
+      - key: DATABASE_ADAPTER
         value: postgresql
 
   - type: worker
