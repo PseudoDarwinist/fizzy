@@ -1,8 +1,8 @@
 class Search::Record < ApplicationRecord
   ADAPTER_MODULES = {
-    "SQLite"      => "search/record/sqlite",
-    "Trilogy"     => "search/record/trilogy",
-    "PostgreSQL"  => "search/record/postgresql",
+    "SQLite"      => "record/sqlite",
+    "Trilogy"     => "record/trilogy",
+    "PostgreSQL"  => "record/postgresql",
   }.freeze
 
   module_path = ADAPTER_MODULES[connection.adapter_name]
