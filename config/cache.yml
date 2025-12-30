@@ -14,4 +14,10 @@ development: *default
 test: *default_options
 beta: *default
 staging: *default
-production: *default
+# Only configure Solid Cache database connection if using solid_cache_store
+production:
+<%= if ENV.fetch("CACHE_STORE", "solid_cache_store") == "solid_cache_store" %>
+  <<: *default
+<% else %>
+  <<: *default_options
+<% end %>
