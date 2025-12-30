@@ -41,3 +41,6 @@
 
 /config/credentials/*.key
 .DS_Store
+
+# Ignore SpecStory session logs
+/.specstory/
