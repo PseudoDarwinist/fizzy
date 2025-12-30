@@ -94,8 +94,9 @@ Rails.application.configure do
   config.cache_store = :solid_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue, reading: :queue } }
+  # Allow overriding with JOB_QUEUE_ADAPTER env var (e.g., "async" for simpler deployments)
+  config.active_job.queue_adapter = ENV.fetch("JOB_QUEUE_ADAPTER", "solid_queue").to_sym
+  config.solid_queue.connects_to = { database: { writing: :queue, reading: :queue } } if config.active_job.queue_adapter == :solid_queue
   # config.active_job.queue_name_prefix = "fizzy_production"
 
   config.action_mailer.perform_caching = false
