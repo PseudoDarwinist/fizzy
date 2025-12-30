@@ -91,7 +91,8 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  config.cache_store = :solid_cache_store
+  # Allow overriding with CACHE_STORE env var (e.g., "memory_store" for simpler deployments)
+  config.cache_store = ENV.fetch("CACHE_STORE", "solid_cache_store").to_sym
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # Allow overriding with JOB_QUEUE_ADAPTER env var (e.g., "async" for simpler deployments)
